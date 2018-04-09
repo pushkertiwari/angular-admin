@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-sm-12">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <app-card [title]="'Get Token Users Listing'">
+      <div class="dt-responsive">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+            <div>
+              <label class="label-control">Show
+                <select class="form-control input-sm full-data-show-entry" [(ngModel)]="rowsOnPage">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="25">25</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+                entries
+              </label>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div style="text-align: right;">
+              <label>Search:
+                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search">
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="panel-heading">User information</div>-->
+        <table class="table table-striped table-bordered table-responsive full-data-table" [mfData]="data | Filter:{ email: filterQuery, office: filterQuery } : false" #mf="mfDataTable"
+               [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+          <thead>
+          <tr>
+            <th>
+              <mfDefaultSorter by="email">Email</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="ipAddress">Ip Address</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="country-name">Country Name</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="device">Device Info</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="terms">Terms Accpeted</mfDefaultSorter>
+            </th>
+           <!-- <th>
+              <mfDefaultSorter>Action</mfDefaultSorter>
+            </th> -->
+          </tr>
+          <tr>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of mf.data">
+            <td>{{item.email}}</td>
+            <td>{{item.ip}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <!--<td>
+            <a href="javascript:;" class="crm-action-delete text-muted text-danger">
+            <i class="icofont icofont-delete-alt"></i></a>
+            </td> -->
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <th>Email</th>
+            <th>Ip Address</th>
+            <th>Country Name</th>
+            <th>Device Info</th>
+            <th>Terms Accpeted</th>
+           <!-- <th>Action</th> -->
+          </tr>
+          <tr>
+            <td colspan="6">
+              <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

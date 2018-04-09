@@ -1,0 +1,247 @@
+<div class="row">
+	<div class="col-sm-12">
+		<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+		<app-card [title]="'Applications'">
+			<div class="dt-responsive">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+						<div>
+							<label class="label-control">Show
+								<select class="form-control input-sm full-data-show-entry" [(ngModel)]="rowsOnPage">
+									<option [ngValue]="10">10</option>
+									<option [ngValue]="25">25</option>
+									<option [ngValue]="50">50</option>
+									<option [ngValue]="100">100</option>
+								</select>
+								entries
+							</label>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6">
+						<div style="text-align: right;">
+							<label>Search:
+								<input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search">
+							</label>
+						</div>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-responsive full-data-table" [mfData]="data | Filter:{ email: filterQuery, office: filterQuery } : false" #mf="mfDataTable"
+				[mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+				<thead>
+					<tr>
+						<th>
+							<mfDefaultSorter by="firstname">Firstname</mfDefaultSorter>
+						</th>
+						<th>
+							<mfDefaultSorter by="lastname">Lastname</mfDefaultSorter>
+						</th>
+						<th>
+							<mfDefaultSorter by="email">Email</mfDefaultSorter>
+						</th>
+						<th>
+							<mfDefaultSorter by="phone">Phone</mfDefaultSorter>
+						</th>
+						<th>
+							<mfDefaultSorter by="view">View</mfDefaultSorter>
+						</th>
+						<th>
+							<mfDefaultSorter by="view">Status</mfDefaultSorter>
+						</th>
+
+					</tr>
+				</thead>
+				<tbody >
+					<tr *ngFor="let item of data">
+						<td>{{item.personalinfo.firstname}}</td>
+						<td>{{item.personalinfo.lastname}}</td>
+						<td>{{item.personalinfo.email}}</td>
+						<td>{{item.personalinfo.phone}}</td>
+						<td>
+							<button class="btn btn-danger btn-icon waves-effect" (click)="modalDefault.show()"><i class="icofont icofont-eye-alt"></i></button>
+							<!-- <button type="button" class="btn btn-default " >Static</button> -->
+							<app-modal-basic #modalDefault>
+								<div class="app-modal-header">
+									<h4 class="modal-title">View Details</h4>
+									<button type="button" class="close basic-close" (click)="modalDefault.hide()">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="app-modal-body">
+									<div class="row">
+										<div class="col-md-6">
+											<h5>Personal Info</h5>
+											<table class="table ">
+												<tbody>
+													<tr>
+														<td>Firstname</td>
+														<td>{{item.personalinfo.firstname}}</td>
+													</tr>
+													<tr>
+														<td>Lastname</td>
+														<td>{{item.personalinfo.lastname}}</td>
+													</tr>
+													<tr>
+														<td>Email</td>
+														<td>{{item.personalinfo.email}}</td>
+													</tr>
+													<tr>
+														<td>Phone</td>
+														<td>{{item.personalinfo.phone}}</td>
+													</tr>
+													<tr>
+														<td>Address</td>
+														<td>{{item.personalinfo.address.firstline}},{{item.personalinfo.address.secondline}} </td>
+													</tr>
+													<tr>
+														<td>City</td>
+														<td>{{item.personalinfo.address.city}} </td>
+													</tr>
+													<tr>
+														<td>State</td>
+														<td>{{item.personalinfo.address.state}} </td>
+													</tr>
+													<tr>
+														<td>Zipcode</td>
+														<td>{{item.personalinfo.address.zipcode}} </td>
+													</tr>
+												</tbody>
+											</table>
+											<h5>Application</h5>
+											<table class="table">
+												<tbody>
+													<tr>
+														<td>Do You Currently Own a Vehicle?</td>
+														<td>{{item.application.ownavehicle}}</td>
+													</tr>
+													<tr>
+														<td>How do you currently get around now?</td>
+														<td>{{item.application.howyougetaround}}</td>
+													</tr>
+													<tr>
+														<td>Do you have a valid Drivers License</td>
+														<td>{{item.application.havedriverlicense}}</td>
+													</tr>
+													<tr>
+														<td>Do you have any children or family members that you care for?</td>
+														<td>{{item.application.havechildren}}</td>
+													</tr>
+													<tr>
+														<td>Do you need a small car or an SUV?</td>
+														<td>{{item.application.cartype}}</td>
+													</tr>
+													<tr>
+														<td>Youtubelink</td>
+														<td>{{item.application.youtubelink}}</td>
+													</tr>
+													<tr>
+														<td>Essay</td>
+														<td><p style="width: 680px">{{item.application.essay}}</p></td>
+													</tr>
+												</tbody>
+											</table>
+											
+										</div>
+										<div class="col-md-6">
+											<h5>Wallet</h5>
+											<table class="table">
+												<tbody>
+													<tr> <td><b>Key</b></td> </tr> 
+													<tr><td style="width: 100px;">{{item.wallet.key}}</td></tr>
+													<tr><td><b>Secret</b></td> </tr> 
+													<tr><td>{{item.wallet.secret}}</td></tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									
+								</div>
+								<div class="app-modal-footer">
+									<button type="button" class="btn btn-default waves-effect" (click)="modalDefault.hide()">Close</button>
+									<!-- <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button> -->
+								</div>
+							</app-modal-basic>
+						</td>
+						<td>
+							<div *ngIf="item.acceptapplication">
+								<ui-switch class="js-success" color="#2ecc71" switchColor="#fff" size="medium" checked (change)="toggleBtn(item._id, $event)"></ui-switch>
+							</div>
+							<div *ngIf="!item.acceptapplication">
+								<ui-switch class="js-success" color="#2ecc71" switchColor="#fff" size="medium" (change)="toggleBtn(item._id, $event)"></ui-switch>
+							</div>	
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>View</th>
+						<th>Status</th>
+					</tr>
+					<tr>
+						<td colspan="6">
+							<mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</app-card>
+</div>
+</div>
+
+<app-modal-animation [modalID]="'modalUpdate'" [modalClass]="'md-modalUpdate'">
+	<h3>Update Time</h3>
+	<div>
+		<ngx-loading [show]="loading2" [config]="{ backdropBorderRadius: '14px' }" ></ngx-loading>
+		<form [formGroup]="update" (ngSubmit)="updateForm($event)">
+			<div class="row form-group">
+				<div class="col-sm-3">
+					<label class="col-form-label">Voting Start</label>
+				</div>
+				<div class="col-sm-9">
+					<input type="hidden" specialCharacters="false" class="form-control" formControlName="id">
+					<div class="input-group">
+						<input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #votingstart="ngbDatepicker" formControlName="votingstart">
+						<div class="input-group-addon bg-default" (click)="votingstart.toggle()" >
+							<span class="icofont icofont-ui-calendar"></span>
+						</div>
+					</div>
+					<div class="error-box" *ngIf="update.controls['votingstart'].hasError('required') && update.controls['votingstart'].touched">* {{ "Voting Start is required!" }}</div>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-sm-3">
+					<label class="col-form-label">Voting Ends</label>
+				</div>
+				<div class="col-sm-9">
+					<div class="input-group">
+						<input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #votingends="ngbDatepicker" formControlName="votingends">
+						<div class="input-group-addon bg-default" (click)="votingends.toggle()" >
+							<span class="icofont icofont-ui-calendar"></span>
+						</div>
+					</div>
+					<div class="error-box" *ngIf="update.controls['votingends'].hasError('required') && update.controls['votingends'].touched">* {{ "Voting Ends is required!" }}</div>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-sm-3">
+					<label class="col-form-label">Winner Announced</label>
+				</div>
+				<div class="col-sm-9">
+					<div class="input-group">
+						<input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #winnerannounced="ngbDatepicker" formControlName="winnerannounced">
+						<div class="input-group-addon bg-default" (click)="winnerannounced.toggle()" >
+							<span class="icofont icofont-ui-calendar"></span>
+						</div>
+					</div>
+					<div class="error-box" *ngIf="update.controls['winnerannounced'].hasError('required') && update.controls['winnerannounced'].touched">* {{ "Winner Announced is required!" }}</div>
+				</div>
+			</div>
+		<button type="submit" [disabled]="!update.valid" class="btn btn-success md-close">Save</button>
+		</form>
+	</div>
+	<button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+</app-modal-animation>

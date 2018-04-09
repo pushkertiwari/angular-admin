@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-sm-10">
+    <app-card [title]="'Footer Social Icons'">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate  submitted>
+            <div class="col-md-6">
+              <div class="input-group input-group-md">
+                <span class="input-group-addon" id="basic-addon8"><i class="icofont icofont-social-facebook"></i></span>
+                <input type="text" class="form-control" formControlName="fbLink" name="fbLink" placeholder="Please enter the fb url">
+              </div>
+               <div class="alert alert-danger"  *ngIf="submitted && myForm.controls['fbLink'].hasError('required')">Please enter the fb url</div>
+               <div class="alert alert-danger" *ngIf="myForm.get('fbLink').errors && myForm.get('fbLink').dirty && myForm.get('fbLink').errors.validUrl">Oops,only urls served over https domain are accepted.</div>
+            </div>
+             <div class="col-md-6">
+              <div class="input-group input-group-md">
+                <span class="input-group-addon" id="basic-addon8"><i class="icofont icofont-social-telegram"></i></span>
+                <input type="text" class="form-control" formControlName="teleLink" name="teleLink"  placeholder="Please enter the telegram url">
+              </div>
+              <div class="alert alert-danger"  *ngIf="submitted && myForm.controls['teleLink'].hasError('required')">Please enter the telegram url </div>
+               <div class="alert alert-danger" *ngIf="myForm.get('teleLink').errors && myForm.get('teleLink').dirty && myForm.get('teleLink').errors.validUrl">Oops,only urls served over https domain are accepted.</div>
+            </div>
+             <div class="col-md-6">
+              <div class="input-group input-group-md">
+                <span class="input-group-addon" id="basic-addon8"><i class="icofont icofont-social-twitter"></i></span>
+                <input type="text" class="form-control" formControlName="twitterLink" name="twitterLink" placeholder="Please enter the twiiter url">
+              </div>
+              <div class="alert alert-danger"  *ngIf="submitted && myForm.controls['twitterLink'].hasError('required')">Please enter the twiiter url</div>
+              <div class="alert alert-danger" *ngIf="myForm.get('twitterLink').errors && myForm.get('twitterLink').dirty && myForm.get('twitterLink').errors.validUrl">Oops,only urls served over https domain are accepted.</div>
+            </div>
+             <div class="col-md-6">
+              <div class="input-group input-group-md">
+                <span class="input-group-addon" id="basic-addon8"><i class="icofont icofont-social-linkedin"></i></span>
+                <input type="text" class="form-control" formControlName="linkedinLink" name="linkedinLink" placeholder="Please enter the Linkedin url">
+              </div>
+               <div class="alert alert-danger"  *ngIf="submitted && myForm.controls['linkedinLink'].hasError('required')">Please enter the Linkedin url</div>
+               <div class="alert alert-danger" *ngIf="myForm.get('linkedinLink').errors && myForm.get('linkedinLink').dirty && myForm.get('linkedinLink').errors.validUrl">Oops,only urls served over https domain are accepted.</div>
+            </div>
+             <div class="col-md-6">
+              <div class="input-group input-group-md">
+                <span class="input-group-addon" id="basic-addon8"><i class="icofont icofont-social-instagram"></i></span>
+                <input type="text" class="form-control" formControlName="instaLink" name="instaLink" placeholder="Please enter the instagram url">
+              </div>
+              <div class="alert alert-danger"  *ngIf="submitted && myForm.controls['instaLink'].hasError('required')">Please enter the instagram url</div>
+              <div class="alert alert-danger" *ngIf="myForm.get('instaLink').errors && myForm.get('instaLink').dirty && myForm.get('instaLink').errors.validUrl">Oops,only urls served over https domain are accepted.</div>
+            </div>
+             <div class="col-md-6">
+              <div class="input-group input-group-md">
+                <span class="input-group-addon" id="basic-addon8"><i class="icofont icofont-social-reddit"></i></span>
+                <input type="text" class="form-control" formControlName="redditLink" name="redditLink" placeholder="Please enter the reddit url">
+              </div>
+              <div class="alert alert-danger"  *ngIf="submitted && myForm.controls['redditLink'].hasError('required')">Please enter the reddit url</div>
+              <div class="alert alert-danger" *ngIf="myForm.get('redditLink').errors && myForm.get('redditLink').dirty && myForm.get('redditLink').errors.validUrl">Oops,only urls served over https domain are accepted.</div>
+            </div>
+             <div class="col-md-6">
+              <div class="input-group input-group-md">
+                <span class="input-group-addon" id="basic-addon8"><i class="icofont icofont-youtube-play"></i></span>
+                <input type="text" class="form-control" formControlName="youtubeLink" name="youtubeLink" placeholder="Please enter the youtube url">
+              </div>
+               <div class="alert alert-danger"  *ngIf="submitted && myForm.controls['youtubeLink'].hasError('required')">Please enter the youtube url</div>
+               <div class="alert alert-danger" *ngIf="myForm.get('youtubeLink').errors && myForm.get('youtubeLink').dirty && myForm.get('youtubeLink').errors.validUrl">Oops,only urls served over https domain are accepted.</div>
+            </div>
+             <div class="col-md-6">
+              <div class="input-group input-group-md">
+                <span class="input-group-addon" id="basic-addon8"><i class="icofont icofont-cur-bitcoin"></i></span>
+                <input type="text" class="form-control" formControlName="bitLink" name="bitLink" placeholder="Please enter the bitcoin url">
+              </div>
+               <div class="alert alert-danger"  *ngIf="submitted && myForm.controls['bitLink'].hasError('required')">Please enter the bitcoin url</div>
+               <div class="alert alert-danger" *ngIf="myForm.get('bitLink').errors && myForm.get('bitLink').dirty && myForm.get('bitLink').errors.validUrl">Oops,only urls served over https domain are accepted.</div>
+            </div>
+             <div class="col-md-6">
+              <div class="input-group input-group-md">
+            <input type="submit" class="btn btn-primary js-dynamic-enable" value="Update Links">
+            </div>
+            </div>
+        </form>
+    </app-card>
+  </div>
+</div>

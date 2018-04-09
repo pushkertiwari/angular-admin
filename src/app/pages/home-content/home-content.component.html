@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-12">
+  <ngx-alerts></ngx-alerts>
+    <!-- Basic Form Inputs card start -->
+    <app-card [title]="'Home Page'">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate  submitted>
+      <h4>WhitePaper</h4>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">WhitePaper first part</label>
+          <div class="col-sm-10">
+            <textarea rows="5" cols="5" formControlName="whitePaperUpper" class="form-control" placeholder="WhitePaper first Content"></textarea>
+          </div>
+        </div>
+         <div class="form-group row">
+          <label class="col-sm-2 col-form-label">WhitePaper second part</label>
+          <div class="col-sm-10">
+            <textarea rows="5" cols="5" formControlName="whitePaperLower" class="form-control"placeholder="WhitePaper second Content"></textarea>
+          </div>
+        </div>
+        <hr>
+         <h4>Technical Team</h4>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <textarea rows="5" cols="5" formControlName="technical"  class="form-control" placeholder="Technical Team Content"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+              <div class="input-group input-group-md">
+            <input type="submit" class="btn btn-primary js-dynamic-enable" value="Update Content">
+            </div>
+            </div>
+      </form>
+    </app-card>
+  </div>
+</div>

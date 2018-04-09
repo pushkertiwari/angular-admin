@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Give Back Content'" [classHeader]="true">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate  submitted>
+      <quill-editor
+        formControlName="textEdit"
+        name="textEdit"
+        [(ngModel)]="editorContent"
+        [options]="editorConfig"
+        (blur)="onEditorBlured($event)"
+        (focus)="onEditorFocused($event)"
+        (ready)="onEditorCreated($event)"
+        (change)="onContentChanged($event)">
+      </quill-editor>
+      <br>
+      <div class="col-md-6">
+        <div class="input-group input-group-md">
+        <input type="submit" class="btn btn-primary js-dynamic-enable" value="Update content">
+        </div>
+      </div>
+      </form>
+    </app-card>
+  </div>
+</div>

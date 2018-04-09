@@ -1,0 +1,113 @@
+<div class="row">
+	<div class="col-sm-12">
+		<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+		<app-card [title]="'Add Product'" [classHeader]="true">
+			<form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate  submitted>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="col-form-label">Title</label>
+						</div>
+						<div class="col-sm-9">
+							<input type="text" specialCharacters="false" class="form-control" formControlName="name">
+							<div class="error-box" *ngIf="myForm.controls['name'].hasError('required') && myForm.controls['name'].touched">* {{ "Title is required!" }}</div>
+							<div class="error-box" *ngIf="myForm.controls['name'].hasError('pattern') && myForm.controls['name'].touched">* {{"Please enter valid title!"}}</div>
+							<div class="error-box" *ngIf="myForm.controls.name.touched && myForm.hasError('checkWhiteSpace')">* {{"Title can not be blank or white space!"}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="col-form-label">Image</label>
+						</div>
+						<div class="col-sm-9">
+							<input type="file" class="form-control" accept="image/jpeg, image/png, image/bmp" formControlName="picture" (change)="handleFileSelect($event)">
+							<div class="error-box" *ngIf="picture_error">* {{ "Please upload only jpeg/jpg/png" }}</div>
+							<div class="error-box" *ngIf="picture_required">* {{ "Picture is required!" }}</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="col-form-label">Value</label>
+						</div>
+						<div class="col-sm-9">
+							<input type="number" specialCharacters="false" class="form-control" formControlName="value">
+							<div class="error-box" *ngIf="myForm.controls['value'].hasError('required') && myForm.controls['value'].touched">* {{ "Value is required!" }}</div>
+						</div>
+					</div>
+					
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="col-form-label">Terms</label>
+						</div>
+						<div class="col-sm-9">
+							<quill-editor
+							formControlName="terms"
+							name="terms"
+							[(ngModel)]="editorContent2"
+							[options]="editorConfig2"
+							(blur)="onEditorBlured($event)"
+							(focus)="onEditorFocused($event)"
+							(ready)="onEditorCreated($event)"
+							(change)="onContentChanged($event)">
+						</quill-editor>
+						<div class="error-box" *ngIf="myForm.controls['terms'].hasError('required') && myForm.controls['terms'].touched">* {{ "Terms is required!" }}</div>
+						</div>
+					</div>
+					
+				</div>	
+
+				<div class="form-group" style="margin-top: 60px;">
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="col-form-label">Description</label>
+						</div>
+						<div class="col-sm-9">
+						<quill-editor
+							formControlName="description"
+							name="description"
+							[(ngModel)]="editorContent"
+							[options]="editorConfig"
+							(blur)="onEditorBlured($event)"
+							(focus)="onEditorFocused($event)"
+							(ready)="onEditorCreated($event)"
+							(change)="onContentChanged($event)">
+						</quill-editor>
+						<div class="error-box" *ngIf="myForm.controls['description'].hasError('required') && myForm.controls['description'].touched">* {{ "Description is required!" }}</div>
+						</div>
+					</div>
+					
+				</div>
+				
+				<div class="form-group" style="margin-top: 60px;">
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="col-form-label">IsFeatured</label>
+						</div>
+						<div class="col-sm-9">
+							<input type="checkbox" specialCharacters="false" formControlName="isFeatured">
+						</div>
+					</div>
+				</div>				
+				<div class="row main-button" style="margin-top: 60px;">
+					<div class="col-md-6">
+						<div class="input-group input-group-md">
+							<div *ngIf="picture_error == true || picture_required == true">
+								<input type="submit" class="btn btn-success js-dynamic-enable" value="Save" disabled>
+							</div>
+							<div *ngIf="!picture_error && !picture_required">
+								<input type="submit" class="btn btn-success js-dynamic-enable" value="Save" [disabled]="!myForm.valid" >
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</app-card>
+	</div>
+</div>
